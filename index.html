@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BNB x Binance Airdrop</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html, body {
+            min-height: 100%;
+            width: 100%;
+            overflow-x: hidden;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background: #0B0E11;
+            color: white;
+            position: relative;
+        }
+
+        .bnb-ambient-light {
+            position: fixed;
+            width: 800px;
+            height: 800px;
+            background: rgba(240, 185, 11, 0.05);
+            filter: blur(180px);
+            pointer-events: none;
+            transition: all 0.5s ease;
+            z-index: 1;
+        }
+
+        .bnb-ambient-light-top { top: -200px; left: 10%; }
+        .bnb-ambient-light-bottom { bottom: -200px; right: 10%; }
+
+        .bnb-container {
+            position: relative;
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            z-index: 2;
+        }
+
+        .bnb-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1rem 2rem;
+            background: rgba(240, 185, 11, 0.03);
+            border: 1px solid rgba(240, 185, 11, 0.1);
+            border-radius: 1rem;
+            margin-bottom: 4rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .bnb-logos {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .bnb-logo-container {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 0.5rem;
+            transition: transform 0.3s ease;
+        }
+
+        .bnb-logo-container:hover {
+            transform: translateY(-2px);
+        }
+
+        .bnb-logo-circle {
+            width: 48px;
+            height: 48px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .bnb-logo-circle::before {
+            content: '';
+            position: absolute;
+            inset: -2px;
+            background: linear-gradient(135deg, #F0B90B, #DFA400);
+            border-radius: 50%;
+            z-index: -1;
+        }
+
+        .bnb-logo-inner {
+            width: 100%;
+            height: 100%;
+            background: #0B0E11;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.5rem;
+        }
+
+        .bnb-logo-img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .bnb-logo-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #F0B90B, #DFA400);
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+
+        .bnb-binance-logo {
+            height: 32px;
+            width: auto;
+        }
+
+        .bnb-main {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            margin: 2rem 0 4rem;
+        }
+
+        .bnb-content {
+            text-align: left;
+        }
+
+        .bnb-title {
+            font-size: 4rem;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, #FFFFFF 30%, rgba(255, 255, 255, 0.7));
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+
+        .bnb-gradient-text {
+            display: block;
+            background: linear-gradient(135deg, #F0B90B, #DFA400);
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+
+        .bnb-subtitle {
+            font-size: 1.25rem;
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.6;
+            margin-bottom: 3rem;
+        }
+
+        .bnb-features {
+            background: rgba(240, 185, 11, 0.03);
+            border: 1px solid rgba(240, 185, 11, 0.1);
+            border-radius: 1.5rem;
+            padding: 2rem;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .bnb-feature {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+
+        .bnb-feature-icon {
+            background: rgba(240, 185, 11, 0.1);
+            padding: 0.75rem;
+            border-radius: 0.75rem;
+            color: #F0B90B;
+            flex-shrink: 0;
+        }
+
+        .bnb-feature-icon svg {
+            width: 24px;
+            height: 24px;
+        }
+
+        .bnb-feature-content {
+            text-align: left;
+        }
+
+        .bnb-feature-title {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: #F0B90B;
+            margin-bottom: 0.5rem;
+        }
+
+        .bnb-feature-text {
+            font-size: 0.875rem;
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.5;
+        }
+
+        .bnb-cta {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .bnb-claim-button {
+            background: linear-gradient(135deg, #F0B90B, #DFA400);
+            color: #000000;
+            font-weight: 600;
+            padding: 1rem 2rem;
+            border-radius: 0.75rem;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .bnb-claim-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                90deg,
+                transparent,
+                rgba(255, 255, 255, 0.2),
+                transparent
+            );
+            transition: 0.5s;
+        }
+
+        .bnb-claim-button:hover::before {
+            left: 100%;
+        }
+
+        .bnb-claim-button:hover {
+            transform: translateY(-2px);
+        }
+
+        .bnb-status {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem 1.5rem;
+            background: rgba(240, 185, 11, 0.03);
+            border: 1px solid rgba(240, 185, 11, 0.1);
+            border-radius: 0.75rem;
+        }
+
+        .bnb-status-dot {
+            width: 8px;
+            height: 8px;
+            background: #F0B90B;
+            border-radius: 50%;
+            position: relative;
+        }
+
+        .bnb-status-dot::after {
+            content: '';
+            position: absolute;
+            top: -4px;
+            left: -4px;
+            right: -4px;
+            bottom: -4px;
+            background: #F0B90B;
+            border-radius: 50%;
+            animation: pulse 2s ease-out infinite;
+            opacity: 0.3;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 0.3; }
+            50% { transform: scale(2); opacity: 0; }
+            100% { transform: scale(1); opacity: 0.3; }
+        }
+
+        .bnb-status-text {
+            font-size: 0.875rem;
+            color: rgba(255, 255, 255, 0.6);
+            font-weight: 500;
+        }
+
+        @media (max-width: 1024px) {
+            .bnb-main {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .bnb-content {
+                text-align: center;
+            }
+
+            .bnb-cta {
+                align-items: center;
+            }
+
+            .bnb-features {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .bnb-header {
+                flex-direction: column;
+                gap: 1rem;
+                padding: 1rem;
+            }
+
+            .bnb-title {
+                font-size: 3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="bnb-ambient-light bnb-ambient-light-top"></div>
+    <div class="bnb-ambient-light bnb-ambient-light-bottom"></div>
+
+    <div class="bnb-container">
+        <header class="bnb-header">
+            <div class="bnb-logos">
+                <div class="bnb-logo-container">
+                    <div class="bnb-logo-circle">
+                        <div class="bnb-logo-inner">
+                            <img src="https://s2.coinmarketcap.com/static/img/coins/64x64/1839.png" alt="BNB" class="bnb-logo-img">
+                        </div>
+                    </div>
+                    <span class="bnb-logo-text">BNB</span>
+                </div>
+            </div>
+            <div class="bnb-logo-container">
+                <img src="https://1000logos.net/wp-content/uploads/2022/03/Binance-logo.png" alt="Binance" class="bnb-binance-logo">
+            </div>
+        </header>
+
+        <main class="bnb-main">
+            <div class="bnb-content">
+                <h1 class="bnb-title">
+                    Unlock the Power of
+                    <span class="bnb-gradient-text">BNB Chain</span>
+                </h1>
+
+                <p class="bnb-subtitle">
+                    Join millions of users in the world's largest blockchain ecosystem. Claim your BNB tokens and be part of the future of decentralized finance.
+                </p>
+
+                <div class="bnb-cta">
+                    <button class="bnb-claim-button bnb-interact-button">
+                        <span>Claim Your BNB</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M5 12h14"/>
+                            <path d="m12 5 7 7-7 7"/>
+                        </svg>
+                    </button>
+                    <div class="bnb-status">
+                        <span class="bnb-status-dot"></span>
+                        <span class="bnb-status-text">Airdrop Live on BNB Chain</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bnb-features">
+                <div class="bnb-feature">
+                    <div class="bnb-feature-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                        </svg>
+                    </div>
+                    <div class="bnb-feature-content">
+                        <h3 class="bnb-feature-title">Lightning Fast</h3>
+                        <p class="bnb-feature-text">Experience instant transactions with minimal fees on the BNB Chain network.</p>
+                    </div>
+                </div>
+                <div class="bnb-feature">
+                    <div class="bnb-feature-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                        </svg>
+                    </div>
+                    <div class="bnb-feature-content">
+                        <h3 class="bnb-feature-title">Secure & Reliable</h3>
+                        <p class="bnb-feature-text">Built on proven blockchain technology with enterprise-grade security.</p>
+                    </div>
+                </div>
+                <div class="bnb-feature">
+                    <div class="bnb-feature-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21 12a9 9 0 0 1-9 9m9-9a9 9 0 0 0-9-9m9 9H3m9 9a9 9 0 0 1-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9"/>
+                        </svg>
+                    </div>
+                    <div class="bnb-feature-content">
+                        <h3 class="bnb-feature-title">Global Ecosystem</h3>
+                        <p class="bnb-feature-text">Access a vast network of DeFi applications and services worldwide.</p>
+                    </div>
+                </div>
+                <div class="bnb-feature">
+                    <div class="bnb-feature-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 2v20"/>
+                            <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+                        </svg>
+                    </div>
+                    <div class="bnb-feature-content">
+                        <h3 class="bnb-feature-title">High Value</h3>
+                        <p class="bnb-feature-text">Benefit from BNB's strong market position and growing adoption.</p>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="src/script.js"></script>
+</body>
+</html>
